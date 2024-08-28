@@ -1,0 +1,18 @@
+        {
+            classes: "//classes",
+            module: "calendar",
+            header: "//header",
+            position: "//position",
+            config: {
+                fade: false,
+                maxTitleLength: 49,
+                maximumEntries: "//maximumEntries",
+                calendars: [
+                    {
+                        fetchInterval: 300000,
+                        symbol: "//symbol",
+                        url: "//url"
+                    }
+                ]
+            }
+        },

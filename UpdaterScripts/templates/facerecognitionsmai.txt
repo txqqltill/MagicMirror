@@ -1,0 +1,7 @@
+        {
+            classes: "//classes",
+            module: "MMM-Face-Recognition-SMAI",
+            position: "//position",
+            config: {
+            }
+        },

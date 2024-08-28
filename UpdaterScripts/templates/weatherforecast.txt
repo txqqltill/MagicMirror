@@ -1,0 +1,15 @@
+        {
+            classes: "//classes",
+            module: "weather",
+            position: "//position",
+            header: "//header",
+            config:
+            {
+                weatherProvider: "openweathermap",
+                type: "forecast",
+                location: "//location",
+                locationID: "//locationID",
+                apiKey: "//apiKey",
+                colored: "//colored"
+            }
+        },

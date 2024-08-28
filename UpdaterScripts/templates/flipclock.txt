@@ -1,0 +1,7 @@
+        {
+            classes: "//classes",
+            module: "MMM-FlipClock",
+            position: "//position",
+            config:{
+            },
+        },

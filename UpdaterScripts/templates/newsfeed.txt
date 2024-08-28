@@ -1,0 +1,14 @@
+        {
+            classes: "//classes",
+            module: "newsfeed",
+            position: "//position",
+            config: {
+                feeds: [
+//sources
+                ],
+                showSourceTitle: true,
+                showPublishDate: true,
+                broadcastNewsFeed: true,
+                broadcastNewsUpdates: true
+            }
+        },
