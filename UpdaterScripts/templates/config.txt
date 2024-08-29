@@ -12,8 +12,9 @@ let config = {
 	timeFormat: 24,
 	units: "metric",
 	modules: [
+//defaultmodules
 //modules
-		//hjtmjt
+// Add your own modules here
 	]
 };
 
