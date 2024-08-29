@@ -24,28 +24,20 @@ module.exports = NodeHelper.create({
                     console.log(face_rec_name);
             });
   
-      fs.readdir('/home/pi/MagicMirror/modules/MMM-Face-Recognition-SMAI/public/', (err, datadir) => {
       
-          if (err) throw err;
+      fs.readdir('/home/pi/MagicMirror/modules/MMM-Face-Recognition-SMAI/public/', (err, datadir) => {
+        if (err) throw err;
+        if (face_rec_name.localeCompare(loggedIn) == 0){
+          
+        }else{
           if(face_rec_name.localeCompare("Guest") == 0)
           {
-              //this.sendSocketNotification("I_NOT", loggedIn)
+              this.sendSocketNotification("I_NOT", face_rec_name)
           }else
           {
-                //this.sendSocketNotification("I_DID", loggedIn)
+              this.sendSocketNotification("I_DID", face_rec_name)
           }
-      });
-      fs.readdir('/home/pi/MagicMirror/modules/MMM-Face-Recognition-SMAI/public/', (err, datadir) => {
-      
-        
-          if (err) throw err;
-          if(face_rec_name.localeCompare("Guest") == 0)
-          {
-              //this.sendSocketNotification("I_NOT", loggedIn)
-          }
-        //if (face_rec_name.localeCompare(loggedIn) == 1){
-        //  this.sendSocketNotification("I_DID", loggedIn)
-        //}
+        }
         loggedIn = face_rec_name;
       });
      

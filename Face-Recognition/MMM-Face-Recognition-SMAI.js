@@ -67,17 +67,15 @@ login_user: function (currentUser) {
 socketNotificationReceived: function(notification, payload) {
     this.login_user(payload);
     var elem = document.getElementById("COUNT")
-    
+    elem.innerHTML = "Welcome back, " + payload
     elem.classList.add(this.config.position);
     elem.style.width = this.config.width;
     var img = document.createElement("img");
     switch(notification) {
 	case "I_DID":
-	    elem.innerHTML = "Welcome back234243, " + payload
-	    img.setAttribute('src', "modules/MMM-Face-Recognition-SMAI/public/"+ Lars +"-id.jpg");
+	    img.setAttribute('src', "modules/MMM-Face-Recognition-SMAI/public/"+ payload +"-id.jpg");
 	    break;
 	default:
-	    elem.innerHTML = "Welcome bac, " + payload
 	    img.setAttribute('src', "modules/MMM-Face-Recognition-SMAI/public/guest.gif");
 	    break;
     }
