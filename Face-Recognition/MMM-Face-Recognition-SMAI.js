@@ -2,10 +2,11 @@ Module.register("MMM-Face-Recognition-SMAI", {
 
 
 defaults: {
-  prompt: "Use FaceID to access profiles",
+  prompt: "",
   width: "200px",
   position: "left",
-  refreshInterval: 2
+  refreshInterval: 2,
+  id: "Guest"
 },
 
 start: function () {
@@ -20,15 +21,12 @@ getStyles: function () {
 
 
 getDom: function() {
-  var element = document.createElement("div")
-  element.className = "face-image"
-  element.innerHTML = this.config.prompt
-  var subElement = document.createElement("p")
-  subElement.id = "COUNT"
-  element.appendChild(subElement)
-
- 
-  return element
+    var element = document.createElement("div")
+    element.className = "face-image"
+    element.innerHTML = this.config.prompt
+    element.id = this.config.id
+    element.setAttribute("prompt", this.config.prompt)
+    return element
 },
 
 //Create Socket Connnection with nodehelper.js
@@ -54,11 +52,11 @@ login_user: function (currentUser) {
 	    }, {lockString: self.identifier});
     });
     MM.getModules().withClass(currentUser).enumerate(function(module) {
-	    module.show(1000, function() {
+	    module.show(0, function() {
 	    }, {lockString: self.identifier});
     });
     MM.getModules().withClass(everyoneClass).enumerate(function(module) {
-	    module.show(1000, function() {
+	    module.show(0, function() {
 	    }, {lockString: self.identifier});
     });
 },
@@ -66,10 +64,15 @@ login_user: function (currentUser) {
 //Recieve notification from socket of Python Variables via nodehelper.js
 socketNotificationReceived: function(notification, payload) {
     this.login_user(payload);
-    var elem = document.getElementById("COUNT")
-    elem.innerHTML = "Welcome back, " + payload
+    var elem = document.getElementById(payload)
+    if(elem.getAttribute("prompt") === ""){
+	elem.innerHTML = "Willkommen zurück, " + payload + "!";
+    }else{
+	elem.innerHTML = elem.getAttribute("prompt");
+    }
     elem.classList.add(this.config.position);
     elem.style.width = this.config.width;
+    var inner_div = document.createElement("div");
     var img = document.createElement("img");
     switch(notification) {
 	case "I_DID":
@@ -79,7 +82,8 @@ socketNotificationReceived: function(notification, payload) {
 	    img.setAttribute('src', "modules/MMM-Face-Recognition-SMAI/public/guest.gif");
 	    break;
     }
-    elem.appendChild(img);
+    inner_div.appendChild(img);
+    elem.appendChild(inner_div)
     return elem
 },
 })

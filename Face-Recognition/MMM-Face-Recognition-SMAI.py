@@ -81,7 +81,7 @@ while True:
     #dont switch user if one image was recognized wrong
     switch = True    
     faces.append(face_id)
-    if len(faces) > 5:
+    if len(faces) > 4:
         faces.pop(0)   
     faceS = faces[0]
     for face in faces:
@@ -94,7 +94,7 @@ while True:
     with open("/home/pi/MagicMirror/modules/MMM-Face-Recognition-SMAI/sample.txt") as f:
         first_line = f.readline().strip('\n')
     print("Person Logged in: {}!".format(first_line))
-    if switch or first_line == "Guest":
+    if switch:
         f = open("/home/pi/MagicMirror/modules/MMM-Face-Recognition-SMAI/sample.txt", "w")
         f.write(face_id)
         f.close()
