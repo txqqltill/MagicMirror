@@ -1,11 +1,4 @@
         {
-            classes: "everyone default",
-            module: "MMM-Face-Recognition-SMAI",
-            position: "top_right",
-            config: {
-            }
-        },
-        {
             classes: "guest default",
             module: "MMM-ip",
             position: "bottom_right",

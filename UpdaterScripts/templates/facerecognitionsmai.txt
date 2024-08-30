@@ -3,5 +3,7 @@
             module: "MMM-Face-Recognition-SMAI",
             position: "//position",
             config: {
+                id: "//id",
+                prompt: "//prompt"
             }
         },

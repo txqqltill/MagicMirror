@@ -1,0 +1,74 @@
+let config = {
+	address: "localhost",
+	port: 8080,
+	basePath: "/",
+	ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"],
+	useHttps: false,
+	httpsPrivateKey: "",
+	httpsCertificate: "",
+	language: "de",
+	locale: "de-DE",
+	logLevel: ["INFO", "LOG", "WARN", "ERROR"],
+	timeFormat: 24,
+	units: "metric",
+	modules: [
+	{
+            classes: "everyone default",
+            module: "MMM-Face-Recognition-SMAI",
+            position: "top_right",
+            config: {
+            }
+	},
+	{
+	    classes: "guest default",
+	    module: 'MMM-Pinfo',
+	    position: 'bottom_right',
+	    config: {
+		debug: true,
+		refresh: 5000,
+		itemAlign: 'left',
+		labelAlign: 'left',
+		valueAlign: 'center',
+		labelSize: null,
+		containerSize: null,
+
+		NETWORK: {
+		    labelType: 'NET Type',
+		    displayType: false,
+		    orderType: 4,
+
+		    labelIPv4: 'IPv4',
+		    displayIPv4: true,
+		    orderIPv4: 5,
+
+		    labelIPv6: 'IPv6',
+		    displayIPv6: false,
+		    orderIPv6: 6,
+
+		    labelMac: 'MAC',
+		    displayMac: false,
+		    orderMac: 7
+		}
+	    }
+	},
+	{
+	    classes: "guest default",
+	    module: 'MMM-ip',
+  position: 'top_left',sition where you want to display the IP address
+  config: {
+	fontSize: 16,
+    useIPv4: true, // Display IPv4 address
+    useIPv6: false, // Do not display IPv6 address
+    showFamily: true, // Hide the network family label (e.g., "IPv4")
+    showType: false, // Show the type of connection (e.g., "WiFi", "Ethernet")
+    showIcon: false, // Hide the icon next to the IP address
+    refreshInterval: 10000 // Refresh interval in milliseconds (e.g., 10000 = 10 seconds)
+  }
+},
+
+//modules
+//add more modules here
+	]
+};
+
+if (typeof module !== "undefined") { module.exports = config; }

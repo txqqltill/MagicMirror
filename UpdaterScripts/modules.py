@@ -9,10 +9,11 @@ class Calendar:
         self.url = url
 
 class FaceRecognitionSMAI:
-    def __init__(self, user, classes, position):
+    def __init__(self, user, classes, position, prompt):
         self.user = user
         self.classes = classes
         self.position = position
+        self.prompt = prompt
 
 class FlipClock:
     def __init__(self, user, classes, position):

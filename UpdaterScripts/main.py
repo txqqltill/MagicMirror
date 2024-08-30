@@ -101,7 +101,7 @@ def modules_command():
                     case "Calendar":
                         print("calendar:\n\tposition: " + module.position + "\n\theader: " + module.header + "\n\tmaximumEntries: " + module.maximumEntries + "\n\tsymbol: " + module.symbol + "\n\turl: " + module.url)
                     case "FaceRecognitionSMAI":
-                        print("MMM-Face-Recognition-SMAI:\n\tposition: " + module.position)
+                        print("MMM-Face-Recognition-SMAI:\n\tposition: " + module.position + "\n\tprompt: " + module.prompt)
                     case "FlipClock":
                         print("MMM-FlipClock:\n\tposition: " + module.position)
                     case "NewsFeed":
@@ -152,8 +152,8 @@ def add_calendar_module(user):
     calendar = Calendar(user, user + " default", data["header"], data["position"], data["maximumEntries"], data["symbol"], data["url"])
     modules[user].append(calendar)
 def add_facerec_module(user):
-    data = request_data({"position": "str"})
-    facerec = FaceRecognitionSMAI(user, user + " default", data["position"])
+    data = request_data({"position": "str", "prompt": "str"})
+    facerec = FaceRecognitionSMAI(user, user + " default", data["position"], data["prompt"])
     modules[user].append(facerec)
 def add_flipclock_module(user):
     data = request_data({"position": "str"})
@@ -164,10 +164,12 @@ def add_newsfeed_module(user):
     newsfeed = NewsFeed(user, user + " default", data["position"], request_news_sources())
     modules[user].append(newsfeed)
 def add_weather_module(user):
+    print("The location ID for a city can be found by searching for the city on https://openweathermap.org/ and copying the ID from the URL after /city/<ID>.")
     data = request_data({"position": "str", "header": "str", "location": "str", "locationID": "int"})
     weather = Weather(user, user + " default", data["position"], data["header"], data["location"], data["locationID"])
     modules[user].append(weather)
 def add_weather_forecast_module(user):
+    print("The location ID for a city can be found by searching for the city on https://openweathermap.org/ and copying the ID from the URL after /city/<ID>.")
     data = request_data({"position": "str", "header": "str", "location": "str", "locationID": "int", "colored": "bool"})
     weather_forecast = WeatherForecast(user, user + " default", data["position"], data["header"], data["location"], data["locationID"], data["colored"])
     modules[user].append(weather_forecast)
@@ -179,8 +181,11 @@ def compile_js():
         module_code += "        //" + user + "\n"
         for module in modules[user]:
             module_code += compile_module(module)
+    with open("templates/defaultmodules.txt") as default_file:
+        default_modules = default_file.read()
     with open("templates/config.txt", "r") as js_template_file:
         js_template = js_template_file.read()
+        js_template = js_template.replace("//defaultmodules", default_modules)
         js_template = js_template.replace("//modules", module_code)
         with open(path_to_config_js, "w") as config_js:
             config_js.write(js_template)
@@ -208,6 +213,8 @@ def compile_module(module):
         with suppress(AttributeError): template = template.replace("//colored", module.colored)
         with suppress(AttributeError): template = template.replace("//maximumEntries", module.maximumEntries)
         with suppress(AttributeError): template = template.replace("//apiKey", api_key)
+        with suppress(AttributeError): template = template.replace("//id", module.user)
+        with suppress(AttributeError): template = template.replace("//prompt", module.prompt)
     return template
 
 # Compile js for news feed sources
@@ -228,6 +235,7 @@ except:
 for file in os.listdir(path_to_images):
     if(file.endswith("-id.jpg")):
         users.append(file.removesuffix("-id.jpg"))
+users.append("Guest")
 
 # Run app
 save()
