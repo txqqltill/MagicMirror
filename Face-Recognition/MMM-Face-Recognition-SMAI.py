@@ -24,10 +24,13 @@ time.sleep(0.1)
 # Load a sample pictures and learn how to recognize them.
 people = []
 print("Loading known face image(s)")
-for file in os.listdir("/home/pi/MagicMirror/modules/MMM-Face-Recognition-SMAI/public"):
+
+path = "/home/pi/MagicMirror/modules/MMM-Face-Recognition-SMAI/public"
+
+for file in os.listdir(path):
     if file.endswith("-id.jpg"):
         fileName = file.replace('-', ' ').split(' ')[0]
-        rec_image = face_recognition.load_image_file("/home/pi/MagicMirror/modules/MMM-Face-Recognition-SMAI/public/%s-id.jpg" % (fileName))
+        rec_image = face_recognition.load_image_file(f"{path}/%s-id.jpg" % (fileName))
         
         rec_face_encodings = face_recognition.face_encodings(rec_image)
         if len(rec_face_encodings) < 1:
@@ -72,7 +75,7 @@ while True:
         # See if the face is a match for the known face(s)
         match = face_recognition.compare_faces(people, face_encoding)
         index = 0
-        for file in os.listdir("/home/pi/MagicMirror/modules/MMM-Face-Recognition-SMAI/public"):
+        for file in os.listdir(path):
                 if file.endswith("-id.jpg"):
                     if match[index]:
                         face_id = file.replace('-', ' ').split(' ')[0]
@@ -91,11 +94,12 @@ while True:
 
     
     #if another person is recognized they get directly connected, if the current user is a guest
-    with open("/home/pi/MagicMirror/modules/MMM-Face-Recognition-SMAI/sample.txt") as f:
+    sample_txt = "/home/pi/MagicMirror/modules/MMM-Face-Recognition-SMAI/sample.txt"
+    with open(sample_txt) as f:
         first_line = f.readline().strip('\n')
     print("Person Logged in: {}!".format(first_line))
     if switch:
-        f = open("/home/pi/MagicMirror/modules/MMM-Face-Recognition-SMAI/sample.txt", "w")
+        f = open(sample_txt, "w")
         f.write(face_id)
         f.close()
     
