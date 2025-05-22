@@ -2,8 +2,8 @@ import modules_definitions as modules
 
 module_registry = {
     "calendar": modules.Calendar,
-    "MMM-Face-Recognition-SMAI": modules.FaceRecognitionSMAI,
-    "MMM-FlipClock": modules.FlipClock,
+    "mmm-face-recognition-smai": modules.FaceRecognitionSMAI,
+    "mmm-flipclock": modules.FlipClock,
     "newsfeed": modules.NewsFeed,
     "weather": modules.Weather,
     "weatherforecast": modules.WeatherForecast
