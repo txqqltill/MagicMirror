@@ -1,12 +1,12 @@
-from modules_definitions import Calendar, FlipClock, FaceRecognitionSMAI, NewsFeed, Weather, WeatherForecast
+import modules_definitions as modules
 
 module_registry = {
-    "calendar": Calendar,
-    "MMM-Face-Recognition-SMAI": FaceRecognitionSMAI,
-    "MMM-FlipClock": FlipClock,
-    "newsfeed": NewsFeed,
-    "weather": Weather,
-    "weatherforecast": WeatherForecast
+    "calendar": modules.Calendar,
+    "MMM-Face-Recognition-SMAI": modules.FaceRecognitionSMAI,
+    "MMM-FlipClock": modules.FlipClock,
+    "newsfeed": modules.NewsFeed,
+    "weather": modules.Weather,
+    "weatherforecast": modules.WeatherForecast
 }
 
 def get_module_class(name):
