@@ -3,6 +3,7 @@ from MMM_Face_Recognition_SMAI_Common import (
     get_video,
     get_face_data,
     recognize_faces,
+    log_person
 )
 from time import sleep
 import cv2
@@ -34,7 +35,7 @@ while True:
     sample_txt = "/home/pi/MagicMirror/modules/MMM-Face-Recognition-SMAI/sample.txt"
     with open(sample_txt) as f:
         current_user = f.readline().strip('\n')
-    print(f"Person Logged in: {current_user}")
+    log_person(current_user)
 
     if switch:
         with open(sample_txt, "w") as f:

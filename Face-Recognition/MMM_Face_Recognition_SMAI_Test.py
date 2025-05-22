@@ -2,7 +2,8 @@ from MMM_Face_Recognition_SMAI_Common import (
     load_known_faces,
     get_video,
     get_face_data,
-    recognize_faces
+    recognize_faces,
+    log_person
 )
 import cv2
 
@@ -33,7 +34,7 @@ while True:
         cv2.putText(frame, name, (left + 4, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.5, (255, 255, 255), 1)
 
     if names and names != recognized_last:
-        print("✅ Recognized: " + ", ".join(names))
+        log_person("".join(names))
         recognized_last = names
 
     cv2.imshow("Face Recognition Test", frame)

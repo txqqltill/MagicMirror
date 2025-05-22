@@ -58,3 +58,6 @@ def recognize_faces(face_encodings, known_encodings, known_names):
             name = known_names[index]
         names.append(name)
     return names
+
+def log_person(current_user):
+    print(f"Person Logged in: {current_user}")
