@@ -1,16 +1,16 @@
-import modules_definitions as modules
+import modules.api as API
+import modules.modules_definitions as modules
 
-module_registry = {
-    "calendar": modules.Calendar,
-    "mmm-face-recognition-smai": modules.FaceRecognitionSMAI,
-    "mmm-flipclock": modules.FlipClock,
-    "newsfeed": modules.NewsFeed,
-    "weather": modules.Weather,
-    "weatherforecast": modules.WeatherForecast
-}
+__added_modules = API.API()
+__added_modules.add_module("Calendar", modules.Calendar) \
+             .add_module("MMM-Face-Recognition-SMAI", modules.FaceRecognitionSMAI) \
+             .add_module("MMM-Flipclock", modules.FlipClock) \
+             .add_module("Newsfeed", modules.NewsFeed) \
+             .add_module("Weather", modules.Weather) \
+             .add_module("Weatherforecast", modules.WeatherForecast)
 
-def get_module_class(name):
-    return module_registry.get(name.lower())
+def get_module_class(id):
+    return __added_modules.get_module_by_id(id)
 
 def get_available_modules():
-    return list(module_registry.keys())
+    return __added_modules.list_modules()

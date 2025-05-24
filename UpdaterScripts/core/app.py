@@ -1,6 +1,7 @@
 from core.module_manager import ModuleManager
 from core.user_manager import find_users
 from modules.registry import get_module_class, get_available_modules
+import os
 
 class App:
     def __init__(self, image_path):
@@ -12,20 +13,39 @@ class App:
 
     def run(self):
         while True:
+            #self._cls()
             self.show_main_menu()
 
     def show_main_menu(self):
-        print("Available commands:\nmodules, users, exit")
+        print("Available commands:\nmodules, users, edit, exit, help")
         match input("> ").strip().lower():
             case "modules":
-                self.manage_modules()
+                self.modules()
             case "users":
                 print("\n".join(self.users))
+            case "edit":
+                self.manage_modules()
             case "exit":
                 self.manager.save()
                 exit()
+            case "":
+                self.manager.save()
+                exit()
+            case "help":
+                self.help()
             case _:
                 input("Invalid command.")
+                
+    def help(self):
+        self._cls
+        print("modules lists all avalabel modules you have added to the script")
+        print("users lists all detected users form the Face-Recodnition folder")
+        
+    def modules(self):
+        modules = get_available_modules()
+        print("available modules:")
+        for module in modules:
+            print(f"- {module.get_display_name()}")
 
     def manage_modules(self):
         while True:
@@ -46,7 +66,7 @@ class App:
                     break
 
     def add_module(self, user):
-        print("Available modules:\n" + "\n".join(get_available_modules()))
+        print("Available modules:\n" + "\n".join(self.get_available_modules_with_id()))
         module_name = input("Module name:\n> ").strip()
         mod_class = get_module_class(module_name)
         if not mod_class:
@@ -57,6 +77,11 @@ class App:
         module = mod_class(user, user + " default", **data)
         self.manager.add_module(user, module)
         print("Module added.")
+        
+    def get_available_modules_with_id(self):
+        modules = get_available_modules()
+        for module in modules:
+            print(f"- {module.get_info()}")
 
     def request_data(self, param_schema):
         result = {}
@@ -76,3 +101,6 @@ class App:
             case "int": return int(value)
             case "bool": return value.lower() in ["true", "1"]
             case _: raise ValueError("Unsupported type")
+            
+    def _cls():
+        os.system("cls" if os.name == "nt" else "clear")
