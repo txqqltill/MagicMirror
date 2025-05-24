@@ -1,7 +1,7 @@
 import pickle
 
 class ModuleManager:
-    def __init__(self, path="data/modules.pkl"):
+    def __init__(self, path="../data/modules.pkl"):
         self.path = path
         self.modules = {}
 
