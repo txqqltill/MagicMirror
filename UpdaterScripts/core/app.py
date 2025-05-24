@@ -104,4 +104,4 @@ class App:
             case _: raise ValueError("Unsupported type")
             
     def _cls():
-        os.system("cls" if os.name == "nt" else "clear")
+        os.system('cls' if os.name=='nt' else 'clear')
