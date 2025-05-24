@@ -68,8 +68,9 @@ class App:
     def add_module(self, user):
         print("Available modules:")
         self.get_available_modules_with_id()
-        module_name = input("Module name:\n> ").strip()
+        module_name = input("Module ID:\n> ").strip()
         mod_class = get_module_class(module_name)
+        print(mod_class)
         if not mod_class:
             print("Invalid module.")
             return
