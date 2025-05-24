@@ -13,7 +13,7 @@ class App:
 
     def run(self):
         while True:
-            #self._cls()
+            self._cls()
             self.show_main_menu()
 
     def show_main_menu(self):
@@ -66,7 +66,8 @@ class App:
                     break
 
     def add_module(self, user):
-        print("Available modules:\n" + "\n".join(self.get_available_modules_with_id()))
+        print("Available modules:")
+        self.get_available_modules_with_id()
         module_name = input("Module name:\n> ").strip()
         mod_class = get_module_class(module_name)
         if not mod_class:
