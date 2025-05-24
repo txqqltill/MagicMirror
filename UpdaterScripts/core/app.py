@@ -37,7 +37,7 @@ class App:
                 input("Invalid command.")
                 
     def help(self):
-        self._cls
+        self._cls()
         print("modules lists all avalabel modules you have added to the script")
         print("users lists all detected users form the Face-Recodnition folder")
         
@@ -103,5 +103,5 @@ class App:
             case "bool": return value.lower() in ["true", "1"]
             case _: raise ValueError("Unsupported type")
             
-    def _cls():
+    def _cls(self):
         os.system('cls' if os.name=='nt' else 'clear')
