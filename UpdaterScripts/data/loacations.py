@@ -1,0 +1,1 @@
+image_path = "/home/pi/MagicMirror/modules/MMM-Face-Recognition-SMAI/public/"
