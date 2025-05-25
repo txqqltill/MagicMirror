@@ -17,7 +17,11 @@ class App:
             self.show_main_menu()
 
     def show_main_menu(self):
-        print("Available commands:\nmodules, users, edit, exit, help")
+        print("Remote Config Editor for the Magic Mirror\nThe following commands are available:\n")
+        print("modules - lists all avalabel modules you have added to the script")
+        print("users - lists all detected users form the Face-Recodnition folder") 
+        print("edit - edit the configuation of the Magic Mirror")
+        print("exit - Exit the editor")
         match input("> ").strip().lower():
             case "modules":
                 self.modules()
@@ -27,19 +31,13 @@ class App:
                 self.manage_modules()
             case "exit":
                 self.manager.save()
+                self._cls()
                 exit()
             case "":
                 self.manager.save()
                 exit()
-            case "help":
-                self.help()
             case _:
                 input("Invalid command.")
-                
-    def help(self):
-        self._cls()
-        print("modules lists all avalabel modules you have added to the script")
-        print("users lists all detected users form the Face-Recodnition folder")
         
     def modules(self):
         modules = get_available_modules()
