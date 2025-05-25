@@ -59,5 +59,26 @@ def recognize_faces(face_encodings, known_encodings, known_names):
         names.append(name)
     return names
 
-def log_person(current_user):
+def __log_person(current_user):
     print(f"Person Logged in: {current_user}")
+    
+def send_data_to_MM(names, faces):
+    face_id = names[0] if names else "Guest"
+    faces.append(face_id)
+    if len(faces) > 4:
+        faces.pop(0)
+    if all(f == faces[0] for f in faces):
+        switch = True
+    else:
+        switch = False
+
+    sleep(0.5)
+
+    sample_txt = "/home/pi/MagicMirror/modules/MMM-Face-Recognition-SMAI/sample.txt"
+    with open(sample_txt) as f:
+        current_user = f.readline().strip('\n')
+    __log_person(current_user)
+
+    if switch:
+        with open(sample_txt, "w") as f:
+            f.write(face_id)
