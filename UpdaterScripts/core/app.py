@@ -12,8 +12,8 @@ class App:
         self.manager.sync_users(self.users)
 
     def run(self):
+        self._cls()
         while True:
-            self._cls()
             self.show_main_menu()
 
     def show_main_menu(self):
